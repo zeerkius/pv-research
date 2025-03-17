@@ -1,0 +1,78 @@
+This model was made to model breast cancer diagnosis using a Bayesian Belief Network. It is based on Bayes theorem 
+which is defined as , P(A|B) = P(A) * P(B|A) / P(B).
+We take advantage of this and create a tree of statistical inferences based on observed conditional probability.
+This tree or "network" has a given markov conditon so we know how much conditions to apply for each probaility calculation.
+In this model the markov conditon was each node was dependent on its parents ; where each node could have up to three parents.
+
+ex. lets say each feature can either be true of false 
+we are looking at the instance where , X = T , Z = F , N = F
+the graph would look something like below
+
+    X  Z   N
+    \  |  /
+     \ | /
+      \|/
+       y
+
+The calculation looks like
+
+# we calculate the true case
+P(y = T| X = T , Z = F , N = F) ~ 0.53
+
+# and the false case
+P(y = F| X = T , X = F , N = F) ~ 0.27
+
+true = [0.53]
+
+false = [0.27]
+
+    y  k   p
+    \  |  /
+     \ | /
+      \|/
+       f
+
+# we repeat for the next step of the tree where we are looking at features y = T , k = T , p = T
+f is our target feature
+
+
+P(f = T| y = T , k = T , p = T) ~ 0.21
+
+P(f = F| y = T , k = T , p = T) ~ 0.65
+
+true = [0.53 , 0.21]
+
+false = [0.27 ,0.65]
+
+# we calculate the final probability like this
+we multiply each probability after eachother as they are independent events like we do in counting
+
+ex.
+P(A) * P(B) ... * P(Z)
+
+then which ever probability is higher will be our classification
+
+here is some sample pseudocode
+
+def prod(arr):
+    start = 1
+    for x in arr:
+      start *= x
+
+T = prod(true)
+F = prod(false)
+
+if T >= F:
+    return T
+else:
+    return F
+
+
+
+
+
+
+
+
+
+
