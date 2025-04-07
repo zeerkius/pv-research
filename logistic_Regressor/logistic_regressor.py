@@ -33,7 +33,7 @@ class LogisticRegressor:
         
     def binary_cross_entropy(self,y,y_prime):
         # sigmoid_model = y'
-        # bce(y,y`) = - [y * log_2(y') + (1 - y) * log_2(1 - y')]
+        # bce(y,y') = - [y * log_e(y') + (1 - y) * log_e(1 - y')]
         import math
         f = y * math.log(y_prime)
         n = (1 - y) * math.log(1-y_prime)
@@ -46,7 +46,7 @@ class LogisticRegressor:
 
     def log_loss_entropy(self,y,y_prime):
         # sigmoid_model = y'
-        # bce(y,y`) = - [y * log_e(y') + (1 - y) * log_e(1 - y')]
+        # bce(y,y') = - [y * log_2(y') + (1 - y) * log_2(1 - y')]
         import math
         f = y * math.log(y_prime,2)
         n = (1 - y) * math.log(1-y_prime,2)
