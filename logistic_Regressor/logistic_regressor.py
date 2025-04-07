@@ -74,7 +74,7 @@ class LogisticRegressor:
     @numba.njit # speeding up learning schedule
     def learning_rate_decay(alpha, c = 10 , tau = 0):
         # alpha_new = alpha * c / c + tau 
-        # tau grows from [0,batch_size]
+        # tau grows from [0, len(D1) % batch_size] , where D1 is the length of the dataset
         top = alpha * c 
         bottom = c + tau
         new = top / bottom
