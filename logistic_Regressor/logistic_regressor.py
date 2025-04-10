@@ -1,5 +1,4 @@
 
-
 class LogisticRegressor:
     import numba
     import functools
@@ -130,16 +129,22 @@ class LogisticRegressor:
     def precision(self,TP,FP,TN,FN):
         top = TP
         bottom = (TP + FP)
+        if bottom == 0:
+            return 0
         prec = top / bottom
         return prec
     def recall(self,TP,FP,TN,FN):
         top = TP
         bottom = (TP + FN)
+        if bottom == 0:
+            return 0
         recall = top / bottom
         return recall
     def f1score(self,TP,FP,TN,FN):
         top = 2 * self.precision(TP,FP,TN,FN) * self.recall(TP,FP,TN,FN)
         bottom = self.precision(TP,FP,TN,FN) + self.recall(TP,FP,TN,FN)
+        if bottom == 0:
+            return 0
         f1 = top / bottom
         return f1
     def fit(self , batch_size = 5000 , alpha = 0.00005):
@@ -166,7 +171,6 @@ class LogisticRegressor:
         # avoids multiple references
         for val in range(len(targets)):
             if n == batch_size:
-                print(" Batch Limit " , end = "\n\n")
                 print(" Update Weights" , end = "\n\n")
                 for m in range(len(error_cache)):
                     weights[m] = weights[m] - sum(error_cache[m]) * self.learning_rate_decay(alpha = alpha ,tau = t) # minimize loss
@@ -193,7 +197,7 @@ class LogisticRegressor:
         import itertools
         ## Perform Linear Scale Sweep
         performance_slide = []
-        rates = [0.00005 , 0.0005 , 0.005 , 0.05]
+        rates = [0.0000005,0.000005,0.00005 , 0.0005]
         for i in range(len(rates)):
             weight_vector = model.fit(alpha = rates[i])
             cf = self.predict(backtest , weights = weight_vector , targets= gt)
@@ -220,7 +224,6 @@ class LogisticRegressor:
             print(" F1-score " + str(self.f1score(cf[0][0],cf[0][1],cf[1][0],cf[1][1])) , end = "\n\n")
             print(" Precision " +str(self.precision(cf[0][0],cf[0][1],cf[1][0],cf[1][1])) , end = "\n\n")
             print(" Recall " + str(self.recall(cf[0][0],cf[0][1],cf[1][0],cf[1][1])),end = "\n\n")
-
         print(' Final Verdict ' + str(sum(performance_slide) / len(performance_slide)) , end = "\n\n")
         return performance_slide
 
@@ -296,13 +299,13 @@ bmi = start_test.btest_bmi()
 race = start_test.btest_race()
 
 
-r_results = race_log.linear_sweep(race_log,race[1],race[0])
+#r_results = race_log.linear_sweep(race_log,race[1],race[0])
 
-b_results = bmi_log.linear_sweep(bmi_log,bmi[1],bmi[0])
+#b_results = bmi_log.linear_sweep(bmi_log,bmi[1],bmi[0])
 
 
-print(" Linear Sweep - Race Total  " + str(sum(r_results)/len(r_results)) , end = "\n\n")
-print(" Linear Sweep - BMI Total  " + str(sum(b_results)/len(b_results)) , end = "\n\n")
+#print(" Linear Sweep - Race Total  " + str(sum(r_results)/len(r_results)) , end = "\n\n")
+#print(" Linear Sweep - BMI Total  " + str(sum(b_results)/len(b_results)) , end = "\n\n")
 
 
 
@@ -310,23 +313,16 @@ print(" Linear Sweep - BMI Total  " + str(sum(b_results)/len(b_results)) , end =
 
 #bb_results = bmi_log.linear_batch_sweep(bmi_log,bmi[1],bmi[0])
 
-##print(" Linear Batch Sweep - BMI Total  " + str(sum(bb_results)/len(bb_results)))
+#print(" Linear Batch Sweep - BMI Total  " + str(sum(bb_results)/len(bb_results)))
+#print(" Linear Batch Sweep - Race Total  " + str(sum(rr_results)/len(rr_results)))
 
 
-#rrr_results = race_log.linear_batch_alpha_sweep(race_log,race[1],race[0])
+rrr_results = race_log.linear_batch_alpha_sweep(race_log,race[1],race[0])
 
-#bbb_results = bmi_log.linear_batch_alpha_sweep(bmi_log,bmi[1],bmi[0])
-
-
-#print(" Linear Batch Alpha Sweep - Race Total  " + str(sum(rrr_results)/len(rrr_results)))
-#print(" Linear Batch Alpha Sweep - BMI Total  " + str(sum(bbb_results)/len(bbb_results)))
+bbb_results = bmi_log.linear_batch_alpha_sweep(bmi_log,bmi[1],bmi[0])
 
 
-
-
-
-
-
-
+print(" Linear Batch Alpha Sweep - Race Total  " + str(sum(rrr_results)/len(rrr_results)))
+print(" Linear Batch Alpha Sweep - BMI Total  " + str(sum(bbb_results)/len(bbb_results)))
 
 
