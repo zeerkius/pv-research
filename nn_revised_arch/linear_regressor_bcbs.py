@@ -1,10 +1,12 @@
 
-class LinearRegressor:
+
+class Regressor: 
     def __init__(self,path,fit_race = True):
         self.path = path
         self.fit_race = fit_race
     # if you look carefully bothe race and bmi are preprocessed with a extra 1 so we can perform the dot product 
     # this allows us to have a bias vector
+    # features are all scaled 1 - 0 based on sub category range  c[i] in [0,5] 0.2 , 0.4 , 0.6 , 0.8  , 1
     def preprocessbmi(self):
         import numpy as np
         import pandas as pd
@@ -62,6 +64,7 @@ class LinearRegressor:
             return 0
         recall = top / bottom
         return recall
+
     def f1score(self,TP,FP,TN,FN):
         top = 2 * self.precision(TP,FP,TN,FN) * self.recall(TP,FP,TN,FN)
         bottom = self.precision(TP,FP,TN,FN) + self.recall(TP,FP,TN,FN)
@@ -70,34 +73,29 @@ class LinearRegressor:
         f1 = top / bottom
         return f1
 
-    def sum_of_squared_error(self,y,y_prime):
-        loss = (y - y_prime) ** 2
-        return float(loss)
-
-    def sse_gradient(self,y,y_prime,var):
-        # introduce k = 1/2 
-        frst = (y - y_prime)
-        frst = frst * (-1)
-        delta = frst * var
-        return delta
-
-    def activation(self,y_prime):
-        if y_prime >= 0.5:
+    def activation(self,x):
+        if x >= 0.5:
             return 1
         else:
             return 0
 
-    def learning_rate_decay(self,alpha , c = 10 , tau = 0):
+    def reLU(self,x):
+        if x > 0 :
+            return x 
+        else:
+            return 0
+    
+    def dEdwi(self,x,y,var , zero = False):
+        delta = (-1) * (x - y) * (var)
+        return delta
+
+    def learning_rate_decay(self,alpha , c = 1000 , tau = 0):
         # alphanew = alpha * c / (c + t)
-        # or alpha * 1/2 , 1/3 , 1/4 ....
         top = (c / (c + tau))
         new = alpha * top
         return new
 
-
-    def fit(self , batch_size = 1000 , learning_rate = 0.0005):
-        import numpy as np
-        import itertools
+    def fit(self ,epochs = 20 , batch_size = 10000 , learning_rate =  0.0000005 , decay = False , beta = 0.1):
         # get data
         if self.fit_race == True:
             feat = self.preprocessrace()[0]
@@ -106,53 +104,52 @@ class LinearRegressor:
             feat = self.preprocessbmi()[0]
             targ = self.preprocessbmi()[1]
 
-        # x1 * w1 + ..... xn * wn + b
-        weights = [0.5 for x in range(len(feat[0]) - 1)]
-        weights.append(2) # bias initilized as 2
-        # store deltas in error
-        error_cache = [[]for x in range(len(feat[0]))]
+        import numpy as np
+        import sys
 
-        n = 0  # tick for batch_size 
-        Tau = 0 # tick for learning rate decay
-        for i in range(len(feat)):
-            guess = np.dot(feat[i],weights)
-            true_guess = self.activation(guess)
-            if n == batch_size:
-                Tau += 1
-                for m in range(len(weights)):
-                    weights[m] -= sum(error_cache[m]) * self.learning_rate_decay(alpha=learning_rate , tau = Tau)
-                alpha = self.learning_rate_decay(alpha=learning_rate , tau = Tau)
-                error_cache = [[] for x in range(len(feat[0]))] # clear cache
-                print(" New Weights " + str(list(itertools.chain(*weights))) , end = "\n\n")
-                n = 0
-            else:
-                if true_guess == targ[i]:
-                    for j in error_cache:
-                        j.append(0)
+        x = len([i for i in targ if i[0] == 1])
+        y = len([j for j in targ if j[0] == 0])
+        print(x)
+        print(y)
+
+        Tau = 0
+        n = 0
+        velocity = 0
+        stop = len(feat) * epochs
+        weights = [0 for x in range(len(feat[0])-1)]
+        weights.append(5)
+        error_cache = [[] for x in range(len(feat[0]))]
+
+
+        for k in range(epochs):
+            for i in range(len(feat)):
+                dot_product = np.dot(weights,feat[i])
+                y_hat = self.activation(dot_product)
+                if y_hat == targ[i][0]:
+                    continue
+                elif n == batch_size:
+                    if decay == True:
+                        Tau += 1
+                        for j in range(len(weights)):
+                            velocity = (velocity * beta) + sum(error_cache[j])
+                            weights[j] -= (velocity * self.learning_rate_decay(alpha = learning_rate, tau = Tau))
+                    if decay == False:
+                        for j in range(len(weights)):
+                            velocity = (velocity * beta) + sum(error_cache[j])
+                            weights[j] -= (velocity * learning_rate)
+                    print(" New Weights " + str(weights) , end = "\n\n")
+                    error_cache = [[] for j in range(len(feat[0]))] # clear the error cache
+                    n = 0
                 else:
-                    for j in range(len(error_cache)):
-                        error_cache[j].append(self.sse_gradient(targ[i],guess,feat[i][j]))
-            n += 1
-        weights = list(itertools.chain(*weights))
+                    feature_index = 0
+                    for k in range(len(error_cache)):
+                        if dot_product <= 0:
+                            error_cache[k].append(0)
+                        else:
+                            error_cache[k].append(self.dEdwi(x = targ[i][0] , y  = dot_product  , var = feat[i][feature_index]))
+                            feature_index += 1
+                n += 1
         return weights
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-
-
-        
-
-        
 
 
 
@@ -206,6 +203,11 @@ class Testing:
             feat = self.btest_bmi()[0]
             targets = self.btest_bmi()[1]
 
+        x = len([i for i in targets if i == 1])
+        y = len([j for j in targets if j == 0])
+        print(x)
+        print(y)
+
         import numpy as np # do product computation
 
         trained_weights = model.fit()
@@ -218,7 +220,7 @@ class Testing:
             actual_guess = self.activation(guess)
             if actual_guess == 1 and targets[index] == 1:
                 TP += 1
-            if actual_guess == 1 and targets[index] == 1:
+            if actual_guess == 1 and targets[index] == 0:
                 FP += 1
             if actual_guess == 0 and targets[index] == 0:
                 TN += 1
@@ -241,15 +243,28 @@ class Testing:
             
        
 
-race = LinearRegressor(path = r"C:\Users\agboo\nn_revised_arch\bcbs_risk.csv")
+race = Regressor(path = r"C:\Users\agboo\nn_revised_arch\bcbs_risk.csv")
 
 
-race_perf = Testing()
+race_perf = Testing(path = r"C:\Users\agboo\nn_revised_arch\Logr_backtest.csv")
+
+m = race_perf.predict(race)
 
 
 
 
+# checking both models
 
+
+bmi  = Regressor(path = r"C:\Users\agboo\nn_revised_arch\bcbs_risk.csv" , fit_race=False)
+
+bmi_perf = Testing(path = r"C:\Users\agboo\nn_revised_arch\Logr_backtest.csv" , fit_race=False)
+
+n = bmi_perf.predict(bmi)
+
+
+print(m , end = "\n\n")
+print(n , end = "\n\n")
 
 
 
