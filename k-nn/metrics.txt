@@ -1,0 +1,20 @@
+Race Model
+
+Accuracy:  0.610122024404881
+Recall:  0.6932092381937263
+Precision:  0.6550488599348534
+Confusion Matrix:  [[1039 1059]
+ [ 890 2011]]
+F1-Score:  0.6735890135655669
+Matthews Correlation Coeffcient:  0.19103847361700713
+
+
+BMI Model
+
+Accuracy:  0.5939187837567513
+Recall:  0.6184074457083765
+Precision:  0.6602870813397129
+Confusion Matrix:  [[1175  923]
+ [1107 1794]]
+F1-Score:  0.6386614453542185
+Matthews Correlation Coeffcient:  0.17681787004346708
