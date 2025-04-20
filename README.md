@@ -7,7 +7,7 @@ that a given woman dies
  after diagnosis.This is the highest odds of death
  after diagnosis, according to the American Cancer
 Society.(1) This repo addresses methods using Linear Regressiom
-, logistic regression , and decision trees
+, logistic regression , knn , and decision trees
  to detect breast cancer diagnosis as a tool for
  doctors to recommend screening for patients. Ultimately
  helping patients with the battle against cancer
