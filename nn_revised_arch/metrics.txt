@@ -1,0 +1,35 @@
+Training Data ; 87828 Records
+Malignant ~ 0.061% 
+Benign ~ 99.049%
+
+Backtest ; 4999 Records
+Malignant ~ 58%
+Benign ~ 42%
+
+Race Model Metrics:
+
+ Confusion Matrix [TP , FP , TN , FN] [2884, 1537, 561, 17]
+
+ Total Accuracy 0.6891378275655131
+
+ Recall 0.9941399517407791
+
+ Precision 0.6523410992988011
+
+ F1-Score 0.7877629063097514
+
+ Matthews Correlation Co-effecient 0.4036327094590103
+
+BMI Model Metrics:
+
+ Confusion Matrix [TP , FP , TN , FN] [2857, 1598, 500, 44]
+
+ Total Accuracy 0.6715343068613723
+
+ Recall 0.9848328162702517
+
+ Precision 0.6413019079685747
+
+ F1-Score 0.7767808591625884
+
+ Matthews Correlation Co-effecient 0.3536388573644801
