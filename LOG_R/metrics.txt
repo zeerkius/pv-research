@@ -1,4 +1,12 @@
- Race
+Training Data ; 87828 Records
+Malignant ~ 0.061% 
+Benign ~ 99.049%
+
+Backtest ; 4999 Records
+Malignant ~ 58%
+Benign ~ 42%
+
+Race
 
 Random Model Accuracy 0.5041008201640328
  Chi2: 2.75635517184304
