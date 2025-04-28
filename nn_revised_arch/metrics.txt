@@ -6,30 +6,52 @@ Backtest ; 4999 Records
 Malignant ~ 58%
 Benign ~ 42%
 
-Race Model Metrics:
+Race Model
 
- Confusion Matrix [TP , FP , TN , FN] [2884, 1537, 561, 17]
+Random Model Accuracy 0.5099019803960793
+ Chi2: 289.7731498900738
 
- Total Accuracy 0.6891378275655131
+ p-value: 5.571664611506087e-65
+
+ Degrees of Freedom: 1
+
+ Expected Counts:
+[[2967.5 2031.5]
+ [2967.5 2031.5]]
+
+ Confusion Matrix [TP , FP , TN , FN] [2884, 1596, 502, 17]
+
+ Total Accuracy 0.6773354670934186
 
  Recall 0.9941399517407791
 
- Precision 0.6523410992988011
+ Precision 0.64375
 
- F1-Score 0.7877629063097514
+ F1-Score 0.7814659260262838
 
- Matthews Correlation Co-effecient 0.4036327094590103
+ Matthews Correlation Co-effecient 0.3776448126451196
 
-BMI Model Metrics:
+BMI Model
 
- Confusion Matrix [TP , FP , TN , FN] [2857, 1598, 500, 44]
+ Random Model Accuracy 0.4992998599719944
+ Chi2: 312.88519116751183
 
- Total Accuracy 0.6715343068613723
+ p-value: 5.137057758534705e-70
 
- Recall 0.9848328162702517
+ Degrees of Freedom: 1
 
- Precision 0.6413019079685747
+ Expected Counts:
+[[2932. 2067.]
+ [2932. 2067.]]
 
- F1-Score 0.7767808591625884
+ Confusion Matrix [TP , FP , TN , FN] [2877, 1607, 491, 24]
 
- Matthews Correlation Co-effecient 0.3536388573644801
+ Total Accuracy 0.6737347469493898
+
+ Recall 0.9917269906928645
+
+ Precision 0.6416146297948261
+
+ F1-Score 0.7791469194312796
+
+ Matthews Correlation Co-effecient 0.3665101757681312
