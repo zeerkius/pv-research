@@ -1,5 +1,4 @@
 
-
 class Regressor: 
     def __init__(self,path,fit_race = True):
         self.path = path
@@ -95,7 +94,7 @@ class Regressor:
         new = alpha * top
         return new
 
-    def fit(self ,epochs = 20 , batch_size = 10000 , learning_rate =  0.0000005 , decay = False , beta = 0.1):
+    def fit(self ,epochs = 20 , batch_size = 10000 , learning_rate =  0.0000005 , decay = False , beta = 0.2):
         # get data
         if self.fit_race == True:
             feat = self.preprocessrace()[0]
@@ -131,11 +130,11 @@ class Regressor:
                     if decay == True:
                         Tau += 1
                         for j in range(len(weights)):
-                            velocity = (velocity * beta) + sum(error_cache[j])
+                            velocity = (velocity * beta) + ((1-beta) * sum(error_cache[j]))
                             weights[j] -= (velocity * self.learning_rate_decay(alpha = learning_rate, tau = Tau))
                     if decay == False:
                         for j in range(len(weights)):
-                            velocity = (velocity * beta) + sum(error_cache[j])
+                            velocity = (velocity * beta) + ((1-beta) * sum(error_cache[j]))
                             weights[j] -= (velocity * learning_rate)
                     print(" New Weights " + str(weights) , end = "\n\n")
                     error_cache = [[] for j in range(len(feat[0]))] # clear the error cache
@@ -203,16 +202,21 @@ class Testing:
             feat = self.btest_bmi()[0]
             targets = self.btest_bmi()[1]
 
-        x = len([i for i in targets if i == 1])
-        y = len([j for j in targets if j == 0])
-        print(x)
-        print(y)
+
 
         import numpy as np # do product computation
+
+        import random
 
         trained_weights = model.fit()
 
         TP , FP , TN , FN = 0 , 0 , 0 , 0
+
+        
+        rTP , rFP , rTN , rFN = 0 , 0 , 0 , 0
+
+        r = [random.randint(0,1) for x in range(len(feat))] # random guessed used for chi
+        
 
         index = 0
         for vec in feat:
@@ -220,15 +224,46 @@ class Testing:
             actual_guess = self.activation(guess)
             if actual_guess == 1 and targets[index] == 1:
                 TP += 1
+            if r[index] == 1 and targets[index] == 1:
+                rTP += 1
             if actual_guess == 1 and targets[index] == 0:
                 FP += 1
+            if r[index] == 1 and targets[index] == 0:
+                rFP += 1
             if actual_guess == 0 and targets[index] == 0:
                 TN += 1
+            if r[index] == 0 and targets[index] == 0:
+                rTN += 1
             if actual_guess == 0 and targets[index] == 1:
                 FN += 1
+            if r[index] == 0 and targets[index] == 1:
+                rFN += 1
             index += 1
 
         x = [TP , FP , TN , FN]
+        y = [rTP , rFP , rTN , rFN]
+
+        measured = model.acc(x[0],x[1],x[2],x[3])
+        rad = model.acc(y[0],y[1],y[2],y[3])
+
+        
+
+        from scipy.stats import chi2_contingency
+
+        table = [ [TP + TN , FP + FN] , 
+                 [rTP + rTN , rFP + rFN]]
+
+
+        chi2_value, p_value, dof, expected = chi2_contingency(table)
+
+
+        print(" Random Model Accuracy " + str(rad))
+
+        print(f" Chi2: {chi2_value}" , end = "\n\n")
+        print(f" p-value: {p_value}" , end = "\n\n")
+        print(f" Degrees of Freedom: {dof}" , end = "\n\n")
+        print(f" Expected Counts:\n{expected}" , end = "\n\n")
+
 
         print(" Confusion Matrix [TP , FP , TN , FN] " + str(x) , end = "\n\n")
 
@@ -270,8 +305,14 @@ print(n , end = "\n\n")
 
 
 
-        
 
+
+
+
+
+
+
+        
 
 
 
