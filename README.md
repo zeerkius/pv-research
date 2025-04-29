@@ -18,5 +18,5 @@ Society.(1) This repo addresses methods using Linear Regressiom
 
 
  Result 
- Concurring with the paper and hypothesis BMI , when isolated against Race makes model features more significant in 3/4 Models except Decison Tree.  Both Features Make the features more signifigant against BMI in 3/4 Models except Linear Regression.
+ Concurring with the paper and hypothesis BMI , when isolated against Race makes model features more significant in 3/4 Models except Decison Tree.  Both Features Make the features more signifigant against BMI in 3/4 Models except Linear Regression , using this dataset.
 
