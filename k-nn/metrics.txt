@@ -30,4 +30,15 @@ Confusion Matrix:  [[1056 1042]
  [ 927 1974]]
 F1-Score:  0.6672300152104107
 Matthews Correlation Coeffcient:  0.18540654687946515
-Press any key to continue . . .
+
+Both
+
+p-value: 4.176715185676424e-134
+X_squared: 607.3697548245458
+Accuracy:  0.6411282256451291
+Recall:  0.8228197173388486
+Precision:  0.6509408235614944
+Confusion Matrix:  [[ 818 1280]
+ [ 514 2387]]
+F1-Score:  0.726857490864799
+Matthews Correlation Coeffcient:  0.23744709470669675
