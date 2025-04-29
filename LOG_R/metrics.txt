@@ -8,28 +8,29 @@ Benign ~ 42%
 
 Race
 
- Random Model Accuracy 0.49749949989998
- Chi2: 9.618527568350256
+ Random Model Accuracy 0.5043008601720345
+ Chi2: 3.388785417619002
 
- p-value: 0.0019262410854595275
+ p-value: 0.06564128605573435
 
  Degrees of Freedom: 1
 
  Expected Counts:
-[[2565. 2434.]
- [2565. 2434.]]
+[[2567.5 2431.5]
+ [2567.5 2431.5]]
 
- Confusion Matrix [TP , FP , TN , FN] [2262, 1717, 381, 639]
+ Confusion Matrix [TP , FP , TN , FN] [2208, 1692, 406, 693]
 
- Total Accuracy 0.5287057411482297
+ Total Accuracy 0.5229045809161832
 
- Recall 0.7797311271975181
+ Recall 0.7611168562564633
 
- Precision 0.56848454385524
+ Precision 0.5661538461538461
 
- F1-Score 0.6575581395348837
+ F1-Score 0.6493162770180856
 
- Matthews Correlation Co-effecient -0.04735152088932735
+ Matthews Correlation Co-effecient -0.054059401604623136
+
 
 BMI
 
