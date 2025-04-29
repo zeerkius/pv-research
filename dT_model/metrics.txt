@@ -29,3 +29,14 @@ Confusion Matrix:  [[ 870 1228]
  [ 610 2291]]
 F1-Score:  0.7137071651090343
 Matthews Correlation Coeffcient:  0.2209707052572932
+
+Both Model
+
+p-value: 2.6316541085432962e-263
+X_squared: 1201.6798144446398
+Accuracy:  0.6685337067413483
+Recall:  0.9345053429851775
+Precision:  0.6488750598372427
+Confusion Matrix:  [[ 631 1467]
+ [ 190 2711]]
+F1-Score:  0.7659273908744173
