@@ -79,7 +79,9 @@ class Regressor:
 
     def sigmoid(self,x):
         import numpy as np
-        s = (1 / (1 + np.exp(-x)))
+        top = 1
+        bottom = (1 + np.exp(-x))
+        s = top / bottom
         return s
 
     def bce_grad(self,y,z,var):
@@ -93,7 +95,7 @@ class Regressor:
         new = alpha * top
         return new
 
-    def fit(self ,epochs =  50 , batch_size = 14638 , learning_rate =  0.00000005 , decay = True , beta = 0.01):
+    def fit(self ,epochs =  10 , batch_size = 14638 , learning_rate =  0.00000005 , decay = False , beta = 0.3):
         # get data
         if self.fit_race == True:
             feat = self.preprocessrace()[0]
@@ -112,7 +114,7 @@ class Regressor:
         velocity = 0
         stop = len(feat) * epochs
         weights = [0.5 for x in range(len(feat[0])-1)]
-        weights.append(-0.15)
+        weights.append(-0.25)
         error_cache = [[] for x in range(len(feat[0]))]
 
 
