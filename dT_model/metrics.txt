@@ -6,9 +6,10 @@ Backtest ; 4999 Records
 Malignant ~ 58%
 Benign ~ 42%
 
+Race
 
-Race Model
-
+p-value: 1.7786965382554493e-295
+X_squared: 1349.7127344112625
 Accuracy:  0.6729345869173835
 Recall:  0.9489831092726646
 Precision:  0.6492924528301887
@@ -17,9 +18,10 @@ Confusion Matrix:  [[ 611 1487]
 F1-Score:  0.7710404705223358
 Matthews Correlation Coeffcient:  0.3303459824394397
 
+BMI
 
-BMI Model
-
+p-value: 4.1497409776631435e-82
+X_squared: 368.41168732797746
 Accuracy:  0.6323264652930586
 Recall:  0.7897276801103068
 Precision:  0.6510372264847968
