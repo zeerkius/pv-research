@@ -93,7 +93,7 @@ class Regressor:
         new = alpha * top
         return new
 
-    def fit(self ,epochs =  50 , batch_size = 14638 , learning_rate =  0.00000005 , decay = True , beta = 0.1):
+    def fit(self ,epochs =  50 , batch_size = 14638 , learning_rate =  0.00000005 , decay = True , beta = 0.01):
         # get data
         if self.fit_race == True:
             feat = self.preprocessrace()[0]
@@ -111,8 +111,8 @@ class Regressor:
         n = 0
         velocity = 0
         stop = len(feat) * epochs
-        weights = [0.1 for x in range(len(feat[0])-1)]
-        weights.append(-0.1)
+        weights = [0.5 for x in range(len(feat[0])-1)]
+        weights.append(-0.15)
         error_cache = [[] for x in range(len(feat[0]))]
 
 
@@ -203,10 +203,16 @@ class Testing:
 
 
         import numpy as np # do product computation
+        import random
 
         trained_weights = model.fit()
 
         TP , FP , TN , FN = 0 , 0 , 0 , 0
+
+        rTP , rFP , rTN , rFN = 0 , 0 , 0 , 0
+
+        r = [random.randint(0,1) for x in range(len(feat))] # random guessed used for chi
+        
 
         index = 0
         for vec in feat:
@@ -214,15 +220,45 @@ class Testing:
             actual_guess = self.activation(guess)
             if actual_guess == 1 and targets[index] == 1:
                 TP += 1
+            if r[index] == 1 and targets[index] == 1:
+                rTP += 1
             if actual_guess == 1 and targets[index] == 0:
                 FP += 1
+            if r[index] == 1 and targets[index] == 0:
+                rFP += 1
             if actual_guess == 0 and targets[index] == 0:
                 TN += 1
+            if r[index] == 0 and targets[index] == 0:
+                rTN += 1
             if actual_guess == 0 and targets[index] == 1:
                 FN += 1
+            if r[index] == 0 and targets[index] == 1:
+                rFN += 1
             index += 1
 
         x = [TP , FP , TN , FN]
+        y = [rTP , rFP , rTN , rFN]
+
+        measured = model.acc(x[0],x[1],x[2],x[3])
+        rad = model.acc(y[0],y[1],y[2],y[3])
+
+        
+
+        from scipy.stats import chi2_contingency
+
+        table = [ [TP + TN , FP + FN] , 
+                 [rTP + rTN , rFP + rFN]]
+
+
+        chi2_value, p_value, dof, expected = chi2_contingency(table)
+
+
+        print(" Random Model Accuracy " + str(rad))
+
+        print(f" Chi2: {chi2_value}" , end = "\n\n")
+        print(f" p-value: {p_value}" , end = "\n\n")
+        print(f" Degrees of Freedom: {dof}" , end = "\n\n")
+        print(f" Expected Counts:\n{expected}" , end = "\n\n")
 
         print(" Confusion Matrix [TP , FP , TN , FN] " + str(x) , end = "\n\n")
 
@@ -237,10 +273,10 @@ class Testing:
             
        
 
-race = Regressor(path = r"C:\Users\agboo\logistic_Regressor\bcbs_risk.csv")
+race = Regressor(path = r"C:\Users\agboo\LOG_R\bcbs_risk.csv")
 
 
-race_perf = Testing(path = r"C:\Users\agboo\logistic_Regressor\Logr_backtest.csv")
+race_perf = Testing(path = r"C:\Users\agboo\LOG_R\Logr_backtest.csv")
 
 m = race_perf.predict(race)
 
@@ -250,14 +286,13 @@ m = race_perf.predict(race)
 # checking both models
 
 
-bmi  = Regressor(path = r"C:\Users\agboo\logistic_Regressor\bcbs_risk.csv" , fit_race=False)
+bmi  = Regressor(path = r"C:\Users\agboo\LOG_R\bcbs_risk.csv" , fit_race=False)
 
-bmi_perf = Testing(path = r"C:\Users\agboo\logistic_Regressor\Logr_backtest.csv" , fit_race=False)
+bmi_perf = Testing(path = r"C:\Users\agboo\LOG_R\Logr_backtest.csv" , fit_race=False)
 
 n = bmi_perf.predict(bmi)
 
 
 print(m , end = "\n\n")
 print(n , end = "\n\n")
-
 
