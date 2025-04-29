@@ -34,28 +34,24 @@ Race
 
 BMI
 
- Random Model Accuracy 0.5151030206041208
- Chi2: 30.034650690126185
+ Random Model Accuracy 0.4968993798759752
+ Chi2: 18.005061771150295
 
- p-value: 4.243945272680948e-08
+ p-value: 2.2031836465198934e-05
 
  Degrees of Freedom: 1
 
  Expected Counts:
-[[2712. 2287.]
- [2712. 2287.]]
+[[2590.5 2408.5]
+ [2590.5 2408.5]]
 
- Confusion Matrix [TP , FP , TN , FN] [2750, 1999, 99, 151]
+ Confusion Matrix [TP , FP , TN , FN] [2410, 1811, 287, 491]
 
- Total Accuracy 0.5699139827965594
+ Total Accuracy 0.539507901580316
 
- Recall 0.9479489831092727
+ Recall 0.8307480179248535
 
- Precision 0.5790692777426827
+ Precision 0.5709547500592277
 
- F1-Score 0.7189542483660132
+ F1-Score 0.6767761864644762
 
- Matthews Correlation Co-effecient -0.011011065428259538
-
-
- 
