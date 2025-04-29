@@ -1,20 +1,24 @@
 Race Model
 
-Accuracy:  0.610122024404881
-Recall:  0.6932092381937263
-Precision:  0.6550488599348534
-Confusion Matrix:  [[1039 1059]
- [ 890 2011]]
-F1-Score:  0.6735890135655669
-Matthews Correlation Coeffcient:  0.19103847361700713
-
+p-value: 2.797986024728683e-09
+X_squared: 35.31962367818747
+Accuracy:  0.595119023804761
+Recall:  0.6449500172354361
+Precision:  0.6530541012216405
+Confusion Matrix:  [[1104  994]
+ [1030 1871]]
+F1-Score:  0.648976760319112
+Matthews Correlation Coeffcient:  0.17077850936657388
 
 BMI Model
 
-Accuracy:  0.5939187837567513
-Recall:  0.6184074457083765
-Precision:  0.6602870813397129
-Confusion Matrix:  [[1175  923]
- [1107 1794]]
-F1-Score:  0.6386614453542185
-Matthews Correlation Coeffcient:  0.17681787004346708
+p-value: 3.019408272299213e-22
+X_squared: 94.08709905469978
+Accuracy:  0.6061212242448489
+Recall:  0.6804550155118925
+Precision:  0.6545092838196287
+Confusion Matrix:  [[1056 1042]
+ [ 927 1974]]
+F1-Score:  0.6672300152104107
+Matthews Correlation Coeffcient:  0.18540654687946515
+Press any key to continue . . .
