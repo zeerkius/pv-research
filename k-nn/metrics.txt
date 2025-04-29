@@ -1,3 +1,12 @@
+
+Training Data ; 87828 Records
+Malignant ~ 0.061% 
+Benign ~ 99.049%
+
+Backtest ; 4999 Records
+Malignant ~ 58%
+Benign ~ 42%
+
 Race Model
 
 p-value: 2.797986024728683e-09
