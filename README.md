@@ -18,6 +18,5 @@ Society.(1) This repo addresses methods using Linear Regressiom
 
 
  Result 
- Both BMI and Race when factored into machine learning models for diagnosis are 
- equally predictive.
+ Concurring with the paper and hypothesis BMI , when isolated against Race makes model features more significant in 3/4 Models except Decison Tree.  Both Features Make the features more signifigant against BMI in 3/4 Models except Linear Regression.
 
