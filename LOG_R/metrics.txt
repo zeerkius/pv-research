@@ -55,3 +55,31 @@ BMI
 
  F1-Score 0.6767761864644762
 
+
+ Both Model
+ 
+ Random Model Accuracy 0.4926985397079416
+ Chi2: 32.09919480402863
+
+ p-value: 1.4649801926199949e-08
+
+ Degrees of Freedom: 1
+
+ Expected Counts:
+[[2605. 2394.]
+ [2605. 2394.]]
+
+ Confusion Matrix [TP , FP , TN , FN] [2498, 1849, 249, 403]
+
+ Total Accuracy 0.5495099019803961
+
+ Recall 0.8610823853843502
+
+ Precision 0.5746491833448355
+
+ F1-Score 0.6892935982339957
+
+ Matthews Correlation Co-effecient -0.029649785701636334
+
+[2498, 1849, 249, 403]
+
