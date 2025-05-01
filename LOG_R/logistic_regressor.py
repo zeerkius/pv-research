@@ -95,7 +95,7 @@ class Regressor:
         new = alpha * top
         return new
 
-    def fit(self ,epochs =  10 , batch_size = 14638 , learning_rate =  0.00000005 , decay = False , beta = 0.3):
+    def fit(self ,epochs =  32 , batch_size = 14638 , learning_rate =  0.00000005 , decay = False , beta = 0.3):
         # get data
         if self.fit_race == True:
             feat = self.preprocessrace()[0]
@@ -113,8 +113,8 @@ class Regressor:
         n = 0
         velocity = 0
         stop = len(feat) * epochs
-        weights = [0.5 for x in range(len(feat[0])-1)]
-        weights.append(-0.25)
+        weights = [0.15 for x in range(len(feat[0])-1)]
+        weights.append(-0.30)
         error_cache = [[] for x in range(len(feat[0]))]
 
 
@@ -144,7 +144,7 @@ class Regressor:
                         if dot_product <= 0:
                             error_cache[k].append(0)
                         else:
-                            error_cache[k].append(self.bce_grad(y = targ[i][0]  , z  = y_hat  , var = feat[i][feature_index]))
+                            error_cache[k].append(self.bce_grad(y = targ[i][0]  , z  = s  , var = feat[i][feature_index]))
                             feature_index += 1
                 n += 1
                 print(n , end = "\r")
@@ -194,6 +194,14 @@ class Testing:
             return 1
         else:
             return 0
+
+    def sigmoid(self,x):
+        import numpy as np
+        top = 1
+        bottom = (1 + np.exp(-x))
+        s = top / bottom
+        return s
+
     def predict(self ,model):
         if self.fit_race == True:
             feat = self.btest_race()[0]
@@ -219,6 +227,7 @@ class Testing:
         index = 0
         for vec in feat:
             guess = np.dot(trained_weights,vec)
+            guess = self.sigmoid(guess)
             actual_guess = self.activation(guess)
             if actual_guess == 1 and targets[index] == 1:
                 TP += 1
@@ -297,4 +306,3 @@ n = bmi_perf.predict(bmi)
 
 print(m , end = "\n\n")
 print(n , end = "\n\n")
-
