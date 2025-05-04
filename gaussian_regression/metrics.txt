@@ -1,4 +1,0 @@
-Training Data ; 87828 Records
-Malignant ~ 0.061% 
-Benign ~ 99.049%
-
