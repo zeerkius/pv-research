@@ -1,0 +1,93 @@
+Sin Regression
+Training Data ; 87828 Records
+Malignant ~ 0.061% 
+Benign ~ 99.049%
+
+Backtest ; 4999 Records
+Malignant ~ 58%
+Benign ~ 42%
+
+
+
+Race
+
+New Weights [0.9905951649224763, 0.8595323126613839, 0.8502714501779083, 0.8415017884342081, 0.9143105133637698, 0.6501023217064398]
+
+ Random Model Accuracy 0.5043008601720345
+ Chi2: 224.60829990303728
+
+ p-value: 8.938034812631407e-51
+
+ Degrees of Freedom: 1
+
+ Expected Counts:
+[[2891.5 2107.5]
+ [2891.5 2107.5]]
+
+ Confusion Matrix [TP , FP , TN , FN] [2546, 1382, 716, 355]
+
+ Total Accuracy 0.6525305061012202
+
+ Recall 0.8776284039986212
+
+ Precision 0.6481670061099797
+
+ F1-Score 0.7456435788548835
+
+ Matthews Correlation Co-effecient 0.2633015537015762
+
+BMI 
+
+New Weights [0.9971252703048107, 0.8907369203322597, 0.8611380585620918, 0.8666201750758113, 0.9287508861245622, 0.701903149379238]
+
+ Random Model Accuracy 0.5073014602920584
+ Chi2: 115.79815857110322
+
+ p-value: 5.262182035118799e-27
+
+ Degrees of Freedom: 1
+
+ Expected Counts:
+[[2803.5 2195.5]
+ [2803.5 2195.5]]
+
+ Confusion Matrix [TP , FP , TN , FN] [2149, 1176, 922, 752]
+
+ Total Accuracy 0.6143228645729146
+
+ Recall 0.7407790417097553
+
+ Precision 0.6463157894736842
+
+ F1-Score 0.6903308705428847
+
+ Matthews Correlation Co-effecient 0.18848064646670837
+
+
+
+Both
+
+New Weights [0.5534324135446604, 0.6426289123386197, 0.7013161363096705, 0.644851738930485, 0.6795257542662857, 0.8331473867310686]
+
+ Random Model Accuracy 0.5037007401480296
+ Chi2: 67.46520712707671
+
+ p-value: 2.1443810704038598e-16
+
+ Degrees of Freedom: 1
+
+ Expected Counts:
+[[2723. 2276.]
+ [2723. 2276.]]
+
+ Confusion Matrix [TP , FP , TN , FN] [2901, 2071, 27, 0]
+
+ Total Accuracy 0.5857171434286857
+
+ Recall 1.0
+
+ Precision 0.583467417538214
+
+ F1-Score 0.7369490664295694
+
+ Matthews Correlation Co-effecient 0.08665376650520451
