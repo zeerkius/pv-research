@@ -52,5 +52,27 @@ BMI
 
 Both
 
+New Weights [0.5534324135446604, 0.6426289123386197, 0.7013161363096705, 0.644851738930485, 0.6795257542662857, 0.8331473867310686]
 
+ Random Model Accuracy 0.5057011402280456
+ Chi2: 64.22992756753197
 
+ p-value: 1.1071415937047716e-15
+
+ Degrees of Freedom: 1
+
+ Expected Counts:
+[[2728. 2271.]
+ [2728. 2271.]]
+
+ Confusion Matrix [TP , FP , TN , FN] [2901, 2071, 27, 0]
+
+ Total Accuracy 0.5857171434286857
+
+ Recall 1.0
+
+ Precision 0.583467417538214
+
+ F1-Score 0.7369490664295694
+
+ Matthews Correlation Co-effecient 0.08665376650520451
