@@ -17,6 +17,6 @@ Society.(1) This repo addresses methods using Linear Regressiom
  from https://www.cancer.org/cancer/risk-prevention/understanding-cancer-risk/lifetime-probability-of-developing-or-dying-from-cancer.html
 
 
- Result 
- Concurring with the paper and hypothesis BMI , when isolated against Race makes model features more significant in 3/4 Models except Decison Tree.  Both Features Make the features more signifigant against BMI in 3/4 Models except Linear Regression , using this dataset.
+Result 
+Concurring with the paper and hypothesis BMI , when isolated against Race makes model features more significant in 3/5 Models except Decison Tree & Sinusodal Regression after comparing p-values from this dataset. Both Features Make the features more signifigant only using K-NN after comparing p values from this dataset. Each Model instatiation was compared against a random model to compute Chi-Test.
 
